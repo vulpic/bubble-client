@@ -1,7 +1,7 @@
 {
-  "name": "bot-template",
-  "version": "1.0.0",
-  "description": "A discord.js bot template in TypeScript.",
+  "name": "bubble-client",
+  "version": "2.0.0",
+  "description": "An open-source discord.js bot in TypeScript",
   "license": "AGPL-3.0",
   "main": "src/index.ts",
   "scripts": {
@@ -14,14 +14,10 @@
     {
       "name": "Vae",
       "url": "https://github.com/vulpic"
-    },
-    {
-      "name": "Restitutor",
-      "url": "https://github.com/Restitutor"
     }
   ],
   "bugs": {
-    "url": "https://github.com/vulpic/bot-template/issues"
+    "url": "https://github.com/vulpic/bubble-client/issues"
   },
   "keywords": [
     "discord.js",
