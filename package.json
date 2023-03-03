@@ -1,0 +1,56 @@
+{
+  "name": "bot-template",
+  "version": "1.0.0",
+  "description": "A discord.js bot template in TypeScript.",
+  "license": "AGPL-3.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "format": "prettier --write src",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
+  },
+  "maintainers": [
+    {
+      "name": "Vae",
+      "url": "https://github.com/vulpic"
+    },
+    {
+      "name": "Restitutor",
+      "url": "https://github.com/Restitutor"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/vulpic/bot-template/issues"
+  },
+  "keywords": [
+    "discord.js",
+    "typescript",
+    "discord bot",
+    "discord"
+  ],
+  "dependencies": {
+    "@keyvhq/core": "^1.6.26",
+    "@keyvhq/sqlite": "^1.6.28",
+    "@types/moment-duration-format": "^2.2.3",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2",
+    "sequelize": "^6.29.0",
+    "sqlite3": "^5.1.4",
+    "stopword": "^2.0.7",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/stopword": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "2.8.4",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5"
+  },
+  "type": "module"
+}

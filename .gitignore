@@ -1,0 +1,10 @@
+# Code environment:
+.vscode
+
+# Dependencies
+node_modules/
+
+# Private:
+*.sqlite
+.env
+*.log
