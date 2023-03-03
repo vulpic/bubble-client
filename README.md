@@ -1,19 +1,15 @@
-# Typescript Bot Template
+# Bubble
+A open-source discord bot for [discord.js](https://discord.js.org/#/) in TypeScript.
 
-A discord bot template for [discord.js](https://discord.js.org/#/) in TypeScript.
+## Features
+### Weather
+Use the /weather command or type "weather (location)" in chat to see weather information.
+### Quotes
+React to any message with a 📌 (`:pushpin`) to send it into a a "quotes" channel.
+> This allows you to essentially bypass the 50 pin limit discord has.
+### Petitions
+Run the /petitions command to create a petition, or a poll, on something.
 
-## Instuctions
-### Requirements
-* [Node.js](https://nodejs.org/en/) (v16.9.0 or higher)
-### Installation
-1. Download the project and use or `pnpm install` or `npm install`. I recommend installing pnpm which you can do by running `npm install -g pnpm `
-2. Setup a `.env` file with your bot key and app id.
-   >Follow [this guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html) on how to create your bot if you need to.
-2. Follow [this guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html) on how to create your bot if you need to. Add all Privileged Gateway Intents.
-3. Setup a `.env` file with your bot key and app id.
-```env
-TOKEN=bot-token-here
-APP=app-id-here
-```
-4. Run `pnpm start` and you're bot should be online!
-    >Follow [this guide](https://discordjs.guide/preparations/adding-your-bot-to-servers.html) on how to add your bot to servers if you need to.
+## Links
+* [Invite](https://discord.com/api/oauth2/authorize?client_id=1028198032468082728&permissions=8&scope=bot%20applications.commands) the bot
+* Join [our Discord](https://discord.gg/DXJX7kyFgH)
