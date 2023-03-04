@@ -21,7 +21,7 @@ const data: Command = {
     });
     if (!settings) {
       settings = await config.settings.create({
-        guild_id: "1028197882995683388",
+        guild_id: i.guildId,
       });
       if (!settings) {
         await i.reply({
