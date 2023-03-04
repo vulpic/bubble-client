@@ -28,6 +28,7 @@ const data: Command = {
     switch (i.options.getSubcommand(true)) {
       case "create": {
         const inputName = i.options.getString("name", true).toLowerCase()
+        const contents = i.options.getString("content", true).replace('\\n', '\n')
         const [macro, created] = await config.macros.findOrCreate({
           where: {
             guild_id: i.guildId,
@@ -37,7 +38,7 @@ const data: Command = {
             guild_id: i.guildId,
             owner_id: i.user.id,
             macro_name: inputName,
-            macro_contents: i.options.getString("content", true),
+            macro_contents: contents,
           },
         });
 
