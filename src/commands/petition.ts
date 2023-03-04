@@ -49,23 +49,22 @@ const data: Command = {
     )) as TextChannel;
     await i.deferReply();
 
-    let string = "";
-    if (i.guild.id == "148831815984087041") {
-      string = "<@&894314069488701490>";
-    }
+    const string =
+      i.guild.id == "148831815984087041" ? "<@&894314069488701490>" : "";
 
     const start = await channel.send({ content: string, embeds: [embed] });
     await i.editReply(`Successfully sent petition in <#${channel.id}>!`);
 
-    if (i.guild.id != "148831815984087041") {
-      void start.react("yes:1041252681009860620");
-      void start.react("no:1041252679902572585");
-    } else {
-      // small thing for the server its was made for :)
-      void start.react("upvote:639227843758391306");
-      void start.react("downvote:639227835130707978");
-    }
-
+    void start.react(
+      i.guild.id != "148831815984087041"
+        ? "yes:1041252681009860620"
+        : "upvote:639227843758391306"
+    );
+    void start.react(
+      i.guild.id != "148831815984087041"
+        ? "no:1041252679902572585"
+        : "downvote:639227835130707978"
+    );
     logger.info(`${u.username} created a petition in ${i.guild.name}`);
   },
   builder: new SlashCommandBuilder()
