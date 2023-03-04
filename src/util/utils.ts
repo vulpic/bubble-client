@@ -1,6 +1,7 @@
 import {
   ApplicationCommandType,
   ContextMenuCommandBuilder,
+  GuildMember,
   Message,
   SlashCommandBuilder,
 } from "discord.js";
@@ -9,6 +10,7 @@ import {
   MessageContextMenu,
   UserContextMenu,
 } from "../types/interactions";
+import config from "./config";
 
 export const getFiles = (m: Message) => {
   const urls: string[] = m.content
@@ -28,6 +30,13 @@ export const getFiles = (m: Message) => {
     return { attachment: url };
   });
 };
+
+export async function isStaff(guildId: string, member: GuildMember) {
+  const guild = await config.settings.findOne({ where: { guild_id: guildId }})
+  if (!guild) return false;
+  const staffId = guild.get("staff_role") as string | null;
+  return staffId ? member.roles.cache.has(staffId) : false;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isCommand(object: any): object is Command {

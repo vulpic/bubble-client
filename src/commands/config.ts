@@ -26,7 +26,7 @@ const data: Command = {
       if (!settings) {
         await i.reply({
           content:
-            "There was an issue access your guild settings. Please contact the developer.",
+            "There was an issue accessing your guild settings. Please contact the developer.",
           ephemeral: true,
         });
         return;
@@ -97,6 +97,30 @@ const data: Command = {
         });
         return;
       }
+      case "staff-role": {
+        const value = i.options.getRole("role");
+        if (!value) {
+          await settings.update(
+            { staff_role: null },
+            { where: { guild_id: i.guildId } }
+          );
+          await i.reply({
+            content: `Removed staff role on this server.`,
+            ephemeral: true,
+          });
+          return;
+        }
+        await settings.update(
+          { staff_role: value.id },
+          { where: { guild_id: i.guildId } }
+        );
+        await i.reply({
+          content: `Set the staff role to <@&${value.id}>`,
+          ephemeral: true,
+          allowedMentions: { parse: [] }
+        });
+        return;
+      }
     }
     return;
   },
@@ -132,6 +156,18 @@ const data: Command = {
                 .setDescription("Channel to send petitions to.")
             )
         )
+        .addSubcommand((subcommand) =>
+          subcommand
+            .setName("staff-role")
+            .setDescription(
+              "Allows users to bypass some settings."
+            )
+            .addRoleOption((option) =>
+              option
+                .setName("role")
+                .setDescription("Role to bypass.")
+            )
+        )
     )
     .addSubcommand((subcommand) =>
       subcommand
@@ -144,7 +180,8 @@ const data: Command = {
             .setRequired(true)
             .addChoices(
               { name: "Quotes Channel", value: "channel_quotes" },
-              { name: "Petitions Channel", value: "channel_petitions" }
+              { name: "Petitions Channel", value: "channel_petitions" },
+              { name: "Staff Role", value: "staff_role" }
             )
         )
     ),

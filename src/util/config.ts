@@ -15,18 +15,45 @@ const Settings = sequelize.define("guilds", {
   },
   channel_quotes: DataTypes.STRING,
   channel_petitions: DataTypes.STRING,
+  staff_role: DataTypes.STRING,
   message_weather: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
 });
 
+const Macros = sequelize.define("macros", {
+  guild_id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  owner_id: DataTypes.STRING,
+  macro_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  macro_contents: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  global: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  uses: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+});
+
 export async function sync() {
   logger.info("Syncing database...");
-  await Settings.sync();
+  await Settings.sync({alter: true});
+  await Macros.sync();
   logger.info("Database sync complete.");
 }
 
 export default {
   settings: Settings,
+  macros: Macros,
 };

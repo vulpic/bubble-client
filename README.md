@@ -2,6 +2,8 @@
 A open-source discord bot for [discord.js](https://discord.js.org/#/) in TypeScript.
 
 ## Features
+### Macros
+Create macros that you can run with /use <name> that send message like socials, images, or memes. By default everyone can create one with the /macro command, but you can disable it's use in your integrations tab.
 ### Weather
 Use the /weather command or type "weather (location)" in chat to see weather information.
 ### Quotes
