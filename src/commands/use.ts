@@ -25,10 +25,15 @@ const data: Command = {
       return;
     }
 
+    const uses = macro.get("uses") as number
     await i.reply({
       content: `${macro.get("macro_contents")}`,
       allowedMentions: { parse: [] }
     });
+    await macro.update(
+      { uses: uses+1 },
+      { where: { guild_id: i.guildId, macro_name: inputName } }
+    )
     return; 
   },
   autocomplete: async (i) => {
