@@ -212,7 +212,7 @@ const data: Command = {
             .setName("content")
             .setDescription("the contents of the macro.")
             .setRequired(true)
-            .setMaxLength(255)
+            .setMaxLength(2000)
         )
     )
     .addSubcommand((subcommand) =>

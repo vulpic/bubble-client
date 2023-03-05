@@ -33,7 +33,7 @@ const Macros = sequelize.define("macros", {
     allowNull: false,
   },
   macro_contents: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   global: {
