@@ -19,6 +19,7 @@ specifiers:
   stopword: ^2.0.7
   tsx: ^3.12.3
   typescript: ^4.9.5
+  uwuifier: ^4.0.5
   winston: ^3.8.2
 
 dependencies:
@@ -32,6 +33,7 @@ dependencies:
   sequelize: 6.29.0_sqlite3@5.1.4
   sqlite3: 5.1.4
   stopword: 2.0.7
+  uwuifier: 4.0.5
   winston: 3.8.2
 
 devDependencies:
@@ -2353,6 +2355,10 @@ packages:
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+    dev: false
+
+  /uwuifier/4.0.5:
+    resolution: {integrity: sha512-aY94c/5dRXEpJb12H/8DeLbCFfkIjqkLLJz0Ogj46WXsVkvq+CYUmCxs3S4sJGtb78cI8x/PQN6ZXe4QApcIYw==}
     dev: false
 
   /validator/13.9.0:

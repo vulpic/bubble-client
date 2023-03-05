@@ -5,6 +5,7 @@ import {
   Message,
   SlashCommandBuilder,
 } from "discord.js";
+import Uwuifier from "uwuifier";
 import {
   Command,
   MessageContextMenu,
@@ -68,4 +69,16 @@ export function isMessageContext(object: any): object is MessageContextMenu {
     }
   }
   return false;
+}
+
+const uwuifier = new Uwuifier({
+  spaces: {
+    faces: 0.05,
+    actions: 0,
+    stutters: 0.1,
+  }
+})
+
+export default {
+  uwuifier: uwuifier
 }
