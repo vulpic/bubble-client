@@ -50,7 +50,7 @@ const data: BotEvent = {
           iconURL: m.author.avatarURL({ size: 128 }) ?? undefined,
           url: m.url,
         })
-        .setDescription(m.content)
+        .setDescription(m.content.length >= 1 ? m.content : null)
         .setColor(0x2f3136)
         .setFooter({ text: `Pinned by ${u.username}` })
         .setTimestamp(Date.now());
