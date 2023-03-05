@@ -19,20 +19,27 @@ const data: MessageContextMenu = {
     }
     if (message.content == "") {
         await i.reply({
-            content: "No message content.",
+            content: utils.uwuifier.uwuifySentence("There is no message content!"),
             ephemeral: true
         })
         return
     }
-    await message.reply({
-      content: utils.uwuifier.uwuifySentence(message.content),
-      allowedMentions: { parse: [] }
-    });
-    await i.reply({
-        content: "Message UwUified.",
-        ephemeral: true
-    })
-    await i.deleteReply()
+    try {
+        await message.reply({
+            content: utils.uwuifier.uwuifySentence(message.content),
+            allowedMentions: { parse: [] }
+            });
+        await i.reply({
+            content: utils.uwuifier.uwuifySentence("Message UwUified"),
+            ephemeral: true
+        })
+        await i.deleteReply()
+    } catch {
+        await i.reply({
+            content: utils.uwuifier.uwuifySentence("I do not have permissions to type here!"),
+            ephemeral: true
+        })
+    }
 },
 builder: new ContextMenuCommandBuilder()
     .setName("UwUify")
