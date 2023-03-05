@@ -79,6 +79,19 @@ const uwuifier = new Uwuifier({
   }
 })
 
+uwuifier.faces = [
+    "(・\\`ω´・)",
+    ";;w;;",
+    "OwO",
+    "UwU",
+    ">w<",
+    "^w^",
+    "ÚwÚ",
+    "^-^",
+    ":3",
+    "x3",
+];
+
 export default {
   uwuifier: uwuifier
 }
