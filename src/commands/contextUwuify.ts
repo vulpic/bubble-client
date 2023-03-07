@@ -24,13 +24,22 @@ const data: MessageContextMenu = {
         })
         return
     }
+
+    const uwu = utils.uwuifier.uwuifySentence(message.content)
+    if (uwu == message.content) {
+        await i.reply({
+            content: utils.uwuifier.uwuifySentence("This message did not get changed through the filter!"),
+            ephemeral: true
+        })
+        return
+    }
     try {
         await message.reply({
-            content: utils.uwuifier.uwuifySentence(message.content),
+            content: uwu,
             allowedMentions: { parse: [] }
             });
         await i.reply({
-            content: utils.uwuifier.uwuifySentence("Message UwUified"),
+            content: utils.uwuifier.uwuifySentence("Message UwUified!"),
             ephemeral: true
         })
         await i.deleteReply()
