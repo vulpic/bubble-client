@@ -48,8 +48,8 @@ const Macros = sequelize.define("macros", {
 
 export async function sync() {
   logger.info("Syncing database...");
-  await Settings.sync({alter: true});
-  await Macros.sync({alter: true});
+  await Settings.sync({ alter: true });
+  await Macros.sync({ alter: true });
   logger.info("Database sync complete.");
 }
 

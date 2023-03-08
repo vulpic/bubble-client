@@ -27,8 +27,10 @@ const data: Command = {
 
     switch (i.options.getSubcommand(true)) {
       case "create": {
-        const inputName = i.options.getString("name", true).toLowerCase()
-        const contents = i.options.getString("content", true).replace('\\n', '\n')
+        const inputName = i.options.getString("name", true).toLowerCase();
+        const contents = i.options
+          .getString("content", true)
+          .replaceAll("\\n", "\n");
         const [macro, created] = await config.macros.findOrCreate({
           where: {
             guild_id: i.guildId,
@@ -45,20 +47,22 @@ const data: Command = {
         if (!created) {
           await i.reply({
             content: "A macro with this name already exists!",
-            ephemeral: true
+            ephemeral: true,
           });
           return;
         }
 
         await i.reply({
           content: `Created a new macro with the name \`${inputName}\`.`,
-          ephemeral: true
+          ephemeral: true,
         });
-        logger.info(`${i.user.tag} created a new tag ${inputName} in ${i.guildId}`)
+        logger.info(
+          `${i.user.tag} created a new tag ${inputName} in ${i.guildId}`
+        );
         return;
       }
       case "delete": {
-        const inputName = i.options.getString("name", true).toLowerCase()
+        const inputName = i.options.getString("name", true).toLowerCase();
         const macro = await config.macros.findOne({
           where: {
             guild_id: i.guildId,
@@ -69,7 +73,7 @@ const data: Command = {
         if (!macro) {
           await i.reply({
             content: "A macro with this name doesn't exist!",
-            ephemeral: true
+            ephemeral: true,
           });
           return;
         }
@@ -79,24 +83,33 @@ const data: Command = {
           await macro.destroy();
           await i.reply({
             content: `Deleted your macro named \`${inputName}\``,
-            ephemeral: true
+            ephemeral: true,
           });
-          logger.info(`${i.user.tag} deleted their tag ${inputName} in ${i.guildId}`)
+          logger.info(
+            `${i.user.tag} deleted their tag ${inputName} in ${i.guildId}`
+          );
           return;
-        } else if (i.member && (await isStaff(i.guildId, i.member as GuildMember))) {
+        } else if (
+          i.member &&
+          (await isStaff(i.guildId, i.member as GuildMember))
+        ) {
           await macro.destroy();
           await i.reply({
-            content: `Forcefully delete macro named \`${inputName}\` by <@${macro.get("owner_id")}>`,
+            content: `Forcefully delete macro named \`${inputName}\` by <@${macro.get(
+              "owner_id"
+            )}>`,
             ephemeral: true,
-            allowedMentions: { parse: [] }
+            allowedMentions: { parse: [] },
           });
-          logger.info(`${i.user.tag} forcefully deleted the tag ${inputName} in ${i.guildId}`)
+          logger.info(
+            `${i.user.tag} forcefully deleted the tag ${inputName} in ${i.guildId}`
+          );
           return;
         }
 
         await i.reply({
           content: "You do not own this macro!",
-          ephemeral: true
+          ephemeral: true,
         });
         return;
       }
@@ -115,7 +128,7 @@ const data: Command = {
         return;
       }
       case "use": {
-        const inputName = i.options.getString("name", true).toLowerCase()
+        const inputName = i.options.getString("name", true).toLowerCase();
         const macro = await config.macros.findOne({
           where: {
             guild_id: i.guildId,
@@ -126,21 +139,21 @@ const data: Command = {
         if (!macro) {
           await i.reply({
             content: "A macro with this name doesn't exist!",
-            ephemeral: true
+            ephemeral: true,
           });
           return;
         }
 
-        const uses = macro.get("uses") as number
+        const uses = macro.get("uses") as number;
         await i.reply({
           content: `${macro.get("macro_contents")}`,
-          allowedMentions: { parse: [] }
+          allowedMentions: { parse: [] },
         });
         await macro.update(
-          { uses: uses+1 },
+          { uses: uses + 1 },
           { where: { guild_id: i.guildId, macro_name: inputName } }
-        )
-        return
+        );
+        return;
       }
     }
 

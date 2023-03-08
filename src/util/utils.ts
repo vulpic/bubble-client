@@ -33,7 +33,7 @@ export const getFiles = (m: Message) => {
 };
 
 export async function isStaff(guildId: string, member: GuildMember) {
-  const guild = await config.settings.findOne({ where: { guild_id: guildId }})
+  const guild = await config.settings.findOne({ where: { guild_id: guildId } });
   if (!guild) return false;
   const staffId = guild.get("staff_role") as string | null;
   return staffId ? member.roles.cache.has(staffId) : false;
@@ -76,22 +76,22 @@ const uwuifier = new Uwuifier({
     faces: 0.05,
     actions: 0,
     stutters: 0.1,
-  }
-})
+  },
+});
 
 uwuifier.faces = [
-    "(・\\`ω´・)",
-    ";;w;;",
-    "OwO",
-    "UwU",
-    ">w<",
-    "^w^",
-    "ÚwÚ",
-    "^-^",
-    ":3",
-    "x3",
+  "(・\\`ω´・)",
+  ";;w;;",
+  "OwO",
+  "UwU",
+  ">w<",
+  "^w^",
+  "ÚwÚ",
+  "^-^",
+  ":3",
+  "x3",
 ];
 
 export default {
-  uwuifier: uwuifier
-}
+  uwuifier: uwuifier,
+};

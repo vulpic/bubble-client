@@ -117,7 +117,7 @@ const data: Command = {
         await i.reply({
           content: `Set the staff role to <@&${value.id}>`,
           ephemeral: true,
-          allowedMentions: { parse: [] }
+          allowedMentions: { parse: [] },
         });
         return;
       }
@@ -159,13 +159,9 @@ const data: Command = {
         .addSubcommand((subcommand) =>
           subcommand
             .setName("staff-role")
-            .setDescription(
-              "Allows users to bypass some settings."
-            )
+            .setDescription("Allows users to bypass some settings.")
             .addRoleOption((option) =>
-              option
-                .setName("role")
-                .setDescription("Role to bypass.")
+              option.setName("role").setDescription("Role to bypass.")
             )
         )
     )
