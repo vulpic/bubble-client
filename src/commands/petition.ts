@@ -1,4 +1,9 @@
-import { EmbedBuilder, SlashCommandBuilder, TextChannel } from "discord.js";
+import {
+  EmbedBuilder,
+  Message,
+  SlashCommandBuilder,
+  TextChannel,
+} from "discord.js";
 import { client } from "..";
 import { Command } from "../types/interactions";
 import config from "../util/config";
@@ -12,13 +17,16 @@ const data: Command = {
   run: async (i) => {
     if (!i.guildId || !i.guild) return;
     const u = i.user;
+    const contents = i.options
+      .getString("description", true)
+      .replaceAll("\\n", "\n");
 
     const embed: EmbedBuilder = new EmbedBuilder()
       .setTitle(i.options.getString("title") ?? "Petition")
       .setColor(0x2f3136)
       .setFooter({ text: u.username, iconURL: u.avatarURL() ?? undefined })
       .setTimestamp(Date.now())
-      .setDescription(i.options.getString("description", true))
+      .setDescription(contents)
       .setImage(
         i.options.getAttachment("image")
           ? i.options.getAttachment("image")?.url ?? null
@@ -52,15 +60,45 @@ const data: Command = {
     const string =
       i.guild.id == "148831815984087041" ? "<@&894314069488701490>" : "";
 
-    const start = await channel.send({ content: string, embeds: [embed] });
-    await i.editReply(`Successfully sent petition in <#${channel.id}>!`);
+    let petition: Message<boolean> | undefined = undefined;
+    if (i.channelId == channel.id)
+      petition = await i.editReply({ content: string, embeds: [embed] });
+    else {
+      try {
+        petition = await channel.send({ content: string, embeds: [embed] });
+        await i.editReply(`Successfully sent petition in <#${channel.id}>!`);
+      } catch {
+        await i.editReply(`Failed to send petition, I am missing permissions.`);
+        return;
+      }
+    }
 
-    void start.react(
+    const count = i.options.getInteger("choices");
+    if (count) {
+      const emojis = [
+        "1️⃣",
+        "2️⃣",
+        "3️⃣",
+        "4️⃣",
+        "5️⃣",
+        "6️⃣",
+        "7️⃣",
+        "8️⃣",
+        "9️⃣",
+        "🔟",
+      ];
+      for (let i = 0; i < count; i++) {
+        await petition.react(emojis[i]);
+      }
+      return;
+    }
+
+    void petition.react(
       i.guild.id != "148831815984087041"
         ? "yes:1041252681009860620"
         : "upvote:639227843758391306"
     );
-    void start.react(
+    void petition.react(
       i.guild.id != "148831815984087041"
         ? "no:1041252679902572585"
         : "downvote:639227835130707978"
@@ -76,6 +114,15 @@ const data: Command = {
         .setDescription("The description of your petition.")
         .setMaxLength(500)
         .setRequired(true)
+    )
+    .addIntegerOption((option) =>
+      option
+        .setName("choices")
+        .setDescription(
+          "For petitions where you choose between 2-10 options, leave empty for simple yes/no."
+        )
+        .setMaxValue(10)
+        .setMinValue(2)
     )
     .addStringOption((option) =>
       option
